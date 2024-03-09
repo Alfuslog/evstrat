@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main()
+{
+	try
+	{
+		setlocale(LC_ALL, "Rus");
+		int N;
+		int* A;
+		int M;
+		cout << "Введите размер массива\n";
+		cin >> N;
+		if (cin.fail())
+			throw exception();
+		cout << "Исходный массив\n";
+		A = new int[N];
+		const int size = N;
+		srand((unsigned int)time(NULL));
+		for (int i = 0; i < N; i++) {
+			*(A+i) = rand() % 41 - 20;
+			cout << *(A+i);
+			cout << " ";
+		}
+		cout << "\n";
+		if (A[0] > A[1])
+			M = 0;
+		for (int i = 1; i < N - 1; i++) {
+			if (*(A+i) > *(A + i + 1) && *(A+i) > *(A+i-1))
+				M = i;
+		}
+		if (*(A+N-1) > *(A+N - 2))
+			M = N-1;
+		cout << "Номер последнего локального максимума = ";
+		cout << M;
+	}
+	catch (...) {
+		cout << "Некорректный ввод" << endl;
+	}
+}

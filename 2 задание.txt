@@ -1,0 +1,71 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+	try
+	{
+		setlocale(LC_ALL, "Rus");
+		int N;
+		int* A;
+		int M,L,j,s,temp;
+		M=0;
+		s=0;
+		cout << "Введите размер массива\n";
+		cin >> N;
+		if (cin.fail())
+			throw exception();
+		cout << "Исходный массив\n";
+		A = new int[N];
+		const int size = N;
+		srand((unsigned int)time(NULL));
+		for (int i = 0; i < N; i++) {
+			*(A+i) = rand() % 41 - 20;
+			cout << *(A+i);
+			cout << " ";
+		}
+		cout << "\n";
+		for (int i = 0; i < N; i++) {
+		    if (*(A+i+1)<0)
+		    M=M+1;
+		}
+		for (int i = 0; i < N-1; i++) {
+		    if (fabs(*(A+N-1))<fabs(*(A+L)))
+		    L=i;
+		}
+		if (fabs(*(A+N-1))<fabs(*(A+L)))
+		L=N-1;
+		for (int i = L+1; i < N; i++) {
+            s=s+fabs(*(A+i));
+		}
+			for (int i = 0; i < N; i++) {
+		    if (*(A+i)<0)
+		    *(A+i)=pow(*(A+i),2);
+		}
+			for (int i = 0; i < N; i++) {
+		           for (int j = 0; j < N-1; j++) {
+		                if(*(A+j)>*(A+j+1)){
+		                   temp=*(A+j);
+		                   *(A+j)=*(A+j+1);
+		                   *(A+j+1)=temp;
+		        }
+		    }
+		}
+		cout << "Количество отрицательных элементов массива = ";
+		cout << M;
+		cout << "\n";
+		cout << "Сумма модулей элементов массива, расположенных после минимального по модулю элемента = ";
+		cout << s;
+		cout << "\n";
+		cout << "Массив в порядке возрастания с квадратами отрицательных чисел = ";
+		for (int i = 0; i < N; i++) {
+			cout << *(A+i);
+			cout << " ";}
+	}
+	catch (...) {
+		cout << "Некорректный ввод" << endl;
+	}
+}
